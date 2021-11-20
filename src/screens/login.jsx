@@ -4,7 +4,7 @@ const Login = () => {
         Login
     </h1>
     <from>
-        <input type="text">name</input>
+        <input type="text" />
     </from></>
 }
 
