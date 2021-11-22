@@ -6,12 +6,11 @@ import GlobalStyle from "./styles/global";
 function App() {
   return (
     <ThemeProvider>
-      <GlobalStyle>
-        <Routes>
-          <Route path="/" element={<Navigate to="/login" />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </GlobalStyle>
+      <GlobalStyle />
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
     </ThemeProvider>
   );
 }
