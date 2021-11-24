@@ -1,3 +1,5 @@
+import Button from "@mui/material/Button";
+
 const Login = () => {
   return (
     <div>
@@ -13,6 +15,7 @@ const Login = () => {
         <input type="text" id="password" />
         <label for="confirmPassword">Re-enter password</label>
         <input type="text" id="confirmPassword" />
+        <Button variant="contained">Hello World</Button>
       </form>
     </div>
   );
