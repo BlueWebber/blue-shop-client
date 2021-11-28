@@ -1,9 +1,11 @@
-import { Button, TextField, Container, CardContent } from "@mui/material";
+import { Button, TextField, Container, Paper, FormLabel } from "@mui/material";
+import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 
 const Login = () => {
   return (
     <Container>
-      <CardContent>
+      <Paper sx={{ padding: 1 }}>
+        <FormLabel>Login</FormLabel>
         <form>
           <TextField
             type="text"
@@ -50,9 +52,15 @@ const Login = () => {
             required
             fullWidth
           />
-          <Button variant="contained">Submit</Button>
+          <Button
+            variant="contained"
+            endIcon={<ArrowForwardIosRoundedIcon />}
+            sx={{ mt: 1 }}
+          >
+            Submit
+          </Button>
         </form>
-      </CardContent>
+      </Paper>
     </Container>
   );
 };
