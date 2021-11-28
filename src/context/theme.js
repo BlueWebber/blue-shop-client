@@ -21,6 +21,9 @@ const ThemeProvider = ({ children }) => {
         palette: {
           mode: theme,
         },
+        typography: {
+          fontFamily: "Quicksand, Helvetica, Arial, sans-serif",
+        },
       }),
     [theme]
   );
