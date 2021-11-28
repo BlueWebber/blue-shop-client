@@ -7,7 +7,6 @@ import {
   createTheme,
   ThemeProvider as MuiThemeProvider,
 } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
 
 const ThemeSwitcherContext = React.createContext();
 ThemeSwitcherContext.displayName = "ThemeSwitcherContext";
@@ -30,7 +29,6 @@ const ThemeProvider = ({ children }) => {
 
   return (
     <ThemeSwitcherContext.Provider value={[theme, setTheme]}>
-      <CssBaseline />
       <MuiThemeProvider theme={createdTheme}>{children}</MuiThemeProvider>
     </ThemeSwitcherContext.Provider>
   );
