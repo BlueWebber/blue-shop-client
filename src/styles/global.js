@@ -53,6 +53,7 @@ import { createGlobalStyle } from "styled-components";
   */
 
 const GlobalStyle = createGlobalStyle`
+    /*
     .flexColumn {
         display: flex;
         flex-direction: column;
@@ -67,6 +68,7 @@ const GlobalStyle = createGlobalStyle`
         display: flex;
         flex-direction: column;
     }
+    */
 `;
 
 export default GlobalStyle;

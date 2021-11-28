@@ -1,23 +1,59 @@
-import Button from "@mui/material/Button";
+import { Button, TextField, Container, CardContent } from "@mui/material";
 
 const Login = () => {
   return (
-    <div>
-      <label>Login</label>
-      <form>
-        <label for="firstName">First name</label>
-        <input type="text" id="firstName" />
-        <label for="lastName">Last name</label>
-        <input type="text" id="lastName" />
-        <label for="phoneOrEmail">Mobile number or email</label>
-        <input type="text" id="phoneOrEmail" />
-        <label for="password">Password</label>
-        <input type="text" id="password" />
-        <label for="confirmPassword">Re-enter password</label>
-        <input type="text" id="confirmPassword" />
-        <Button variant="contained">Hello World</Button>
-      </form>
-    </div>
+    <Container>
+      <CardContent>
+        <form>
+          <TextField
+            type="text"
+            id="firstName"
+            variant="outlined"
+            label="First Name"
+            margin="normal"
+            required
+            fullWidth
+          />
+          <TextField
+            type="text"
+            id="lastName"
+            variant="outlined"
+            label="Last Name"
+            margin="normal"
+            required
+            fullWidth
+          />
+          <TextField
+            type="text"
+            id="phoneOrEmail"
+            variant="outlined"
+            label="Phone number or email"
+            margin="normal"
+            required
+            fullWidth
+          />
+          <TextField
+            type="password"
+            id="password"
+            variant="outlined"
+            label="Password"
+            margin="normal"
+            required
+            fullWidth
+          />
+          <TextField
+            type="password"
+            id="confirmPassword"
+            variant="outlined"
+            label="Confirm password"
+            margin="normal"
+            required
+            fullWidth
+          />
+          <Button variant="contained">Submit</Button>
+        </form>
+      </CardContent>
+    </Container>
   );
 };
 
