@@ -7,9 +7,16 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
+const navItems = [
+  { name: "Offers", link: "/offers" },
+  { name: "Customer Support", link: "/support" },
+  { name: "Gift Cards", link: "/gifts" },
+  { name: "Sell", link: "/sell" },
+];
+
 const AppBar = () => {
   return (
-    <AppBarComp position="static">
+    <AppBarComp position="static" sx={{ mb: 1 }}>
       <Toolbar>
         <IconButton
           size="large"
@@ -20,10 +27,11 @@ const AppBar = () => {
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          News
-        </Typography>
-        <Button color="inherit">Login</Button>
+        {navItems.map((item) => (
+          <Button variant="text" href={item.link}>
+            {item.name}
+          </Button>
+        ))}
       </Toolbar>
     </AppBarComp>
   );

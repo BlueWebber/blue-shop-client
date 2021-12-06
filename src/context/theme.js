@@ -22,6 +22,9 @@ const ThemeProvider = ({ children }) => {
         },
         typography: {
           fontFamily: "Quicksand, Helvetica, Arial, sans-serif",
+          button: {
+            textTransform: "none",
+          },
         },
       }),
     [theme]
