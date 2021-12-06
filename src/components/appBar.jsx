@@ -1,7 +1,6 @@
 import {
   AppBar as AppBarComp,
   Toolbar,
-  Typography,
   Button,
   IconButton,
 } from "@mui/material";
