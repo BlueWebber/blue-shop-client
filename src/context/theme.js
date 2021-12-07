@@ -19,6 +19,9 @@ const ThemeProvider = ({ children }) => {
       createTheme({
         palette: {
           mode: theme,
+          text: {
+            navButton: "#fff",
+          },
         },
         typography: {
           fontFamily: "Quicksand, Helvetica, Arial, sans-serif",
