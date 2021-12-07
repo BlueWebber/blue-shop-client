@@ -36,6 +36,7 @@ const AppBar = () => {
             sx={{
               color: (theme) => theme.palette.text.navButton,
             }}
+            key={item.name}
           >
             {item.name}
           </Button>
