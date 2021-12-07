@@ -1,5 +1,6 @@
 import { CssBaseline } from "@mui/material";
 import { ThemeProvider } from "../context/theme";
+import { AppDrawerProvider } from "../context/appDrawer";
 import GlobalStyle from "../styles/global";
 
 const AppWrapper = ({ children }) => {
@@ -8,7 +9,7 @@ const AppWrapper = ({ children }) => {
       <ThemeProvider>
         <GlobalStyle />
         <CssBaseline />
-        {children}
+        <AppDrawerProvider>{children}</AppDrawerProvider>
       </ThemeProvider>
     </>
   );
