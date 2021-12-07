@@ -1,5 +1,11 @@
-import { Button, TextField, Container, Paper, FormLabel } from "@mui/material";
-import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
+import {
+  Button,
+  TextField,
+  Container,
+  Paper,
+  Typography,
+  Box,
+} from "@mui/material";
 
 /*
 <TextField
@@ -33,38 +39,45 @@ import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRound
 
 const Login = () => {
   return (
-    <Container>
-      <Paper sx={{ padding: 1 }}>
-        <FormLabel>Login</FormLabel>
-        <form>
-          <TextField
-            type="text"
-            id="phoneOrEmail"
-            variant="outlined"
-            label="Phone number or email"
-            margin="normal"
-            required
-            fullWidth
-          />
-          <TextField
-            type="password"
-            id="password"
-            variant="outlined"
-            label="Password"
-            margin="normal"
-            required
-            fullWidth
-          />
-          <Button
-            variant="contained"
-            endIcon={<ArrowForwardIosRoundedIcon />}
-            sx={{ mt: 1 }}
-          >
-            Submit
-          </Button>
-        </form>
-      </Paper>
-    </Container>
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        flexGrow: 0.6,
+        flexDirection: "column",
+      }}
+    >
+      <Container maxWidth="sm">
+        <Paper sx={{ padding: 1 }}>
+          <Typography align="center" variant="h6" component="h1">
+            Login
+          </Typography>
+          <form onSubmit={(e) => e.preventDefault()}>
+            <TextField
+              type="text"
+              id="phoneOrEmail"
+              variant="outlined"
+              label="Phone number or email"
+              margin="normal"
+              required
+              fullWidth
+            />
+            <TextField
+              type="password"
+              id="password"
+              variant="outlined"
+              label="Password"
+              margin="normal"
+              required
+              fullWidth
+            />
+            <Button variant="contained" fullWidth sx={{ mt: 1 }} type="submit">
+              Submit
+            </Button>
+          </form>
+        </Paper>
+      </Container>
+    </Box>
   );
 };
 
