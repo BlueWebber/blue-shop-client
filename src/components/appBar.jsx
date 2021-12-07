@@ -27,7 +27,13 @@ const AppBar = () => {
           <MenuIcon />
         </IconButton>
         {navItems.map((item) => (
-          <Button variant="text" href={item.link}>
+          <Button
+            variant="text"
+            href={item.link}
+            sx={{
+              color: (theme) => theme.palette.text.primary,
+            }}
+          >
             {item.name}
           </Button>
         ))}
