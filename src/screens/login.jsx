@@ -1,5 +1,5 @@
 import { Button, TextField, Typography, Box, Link } from "@mui/material";
-import FormBox from "../components/common/formBox";
+import FormBox from "../components/common/form/formBox";
 import { Link as RouterLink } from "react-router-dom";
 
 const Login = () => {

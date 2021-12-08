@@ -1,4 +1,4 @@
-import FormBox from "../components/common/formBox";
+import FormBox from "../components/common/form/formBox";
 import { Typography, TextField, Button, Box, Link } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 
