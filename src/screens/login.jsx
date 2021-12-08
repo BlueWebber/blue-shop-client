@@ -1,13 +1,15 @@
-import { Button, TextField, Typography, Box, Link } from "@mui/material";
-import FormBox from "../components/common/form/formBox";
-import { Link as RouterLink } from "react-router-dom";
+import { TextField } from "@mui/material";
+import {
+  FormBox,
+  FormTitle,
+  FormLink,
+  FormSubmitButton,
+} from "../components/common/form";
 
 const Login = () => {
   return (
     <FormBox>
-      <Typography align="center" variant="h6" component="h1">
-        Login
-      </Typography>
+      <FormTitle>Login</FormTitle>
       <form onSubmit={(e) => e.preventDefault()}>
         <TextField
           type="text"
@@ -27,15 +29,9 @@ const Login = () => {
           required
           fullWidth
         />
-        <Button variant="contained" fullWidth sx={{ mt: 1 }} type="submit">
-          Submit
-        </Button>
+        <FormSubmitButton>Submit</FormSubmitButton>
       </form>
-      <Box sx={{ mt: 1, textAlign: "center" }}>
-        <Link component={RouterLink} underline="none" to="/signup">
-          Don't have an account? Sign up today
-        </Link>
-      </Box>
+      <FormLink to="/signup">Don't have an account? Sign up today</FormLink>
     </FormBox>
   );
 };
