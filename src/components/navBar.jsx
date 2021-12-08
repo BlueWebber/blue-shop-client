@@ -6,6 +6,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useAppDrawer } from "../context/appDrawer";
+import { Link } from "react-router-dom";
 
 const navItems = [
   { name: "Offers", link: "/offers" },
@@ -32,7 +33,8 @@ const AppBar = () => {
         {navItems.map((item) => (
           <Button
             variant="text"
-            href={item.link}
+            component={Link}
+            to={item.link}
             sx={{
               color: (theme) => theme.palette.text.navButton,
             }}
