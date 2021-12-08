@@ -87,6 +87,7 @@ const AppDrawer = () => {
         </CollapsableList>
         <Category withDivider>Help & Settings</Category>
         <DrawerButton link="login">Sign In</DrawerButton>
+        <DrawerButton link="signup">Sign Up</DrawerButton>
         <DrawerButton link="language">Language</DrawerButton>
         <DrawerButton link="support">Customer Service</DrawerButton>
       </List>
