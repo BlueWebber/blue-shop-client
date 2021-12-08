@@ -11,58 +11,84 @@ const AppDrawer = () => {
     <Drawer anchor="left" open={drawerOn} onClose={() => setDrawerOn(false)}>
       <List>
         <Category>Shopping Departments</Category>
-        <CollapsableList name="Electronics">
-          <DrawerButton>Accessories & Supplies</DrawerButton>
-          <DrawerButton>Camera & Photo</DrawerButton>
-          <DrawerButton>Car & Vehicle Electronics</DrawerButton>
-          <DrawerButton>Cell Phones & Accessories</DrawerButton>
-          <DrawerButton>GPS & Navigation</DrawerButton>
-          <DrawerButton>Headphones</DrawerButton>
-          <DrawerButton>Home Audio</DrawerButton>
-          <DrawerButton>Office Electronics</DrawerButton>
-          <DrawerButton>Portable Audio & Video</DrawerButton>
-          <DrawerButton>Security & Surveillance</DrawerButton>
+        <CollapsableList name="Electronics" link="electronics">
+          <DrawerButton link="accessories-and-supplies">
+            Accessories & Supplies
+          </DrawerButton>
+          <DrawerButton link="camera-and-photo">Camera & Photo</DrawerButton>
+          <DrawerButton link="car">Car & Vehicle Electronics</DrawerButton>
+          <DrawerButton link="phones-and-accessories">
+            Cell Phones & Accessories
+          </DrawerButton>
+          <DrawerButton link="gps">GPS & Navigation</DrawerButton>
+          <DrawerButton link="headphones">Headphones</DrawerButton>
+          <DrawerButton link="home-audio">Home Audio</DrawerButton>
+          <DrawerButton link="office">Office Electronics</DrawerButton>
+          <DrawerButton link="portable-audio-and-video">
+            Portable Audio & Video
+          </DrawerButton>
+          <DrawerButton link="security">Security & Surveillance</DrawerButton>
         </CollapsableList>
-        <CollapsableList name="Computers">
-          <DrawerButton>Computer Accessories & Peripherals</DrawerButton>
-          <DrawerButton>Computer Components</DrawerButton>
-          <DrawerButton>Computers & Tablets</DrawerButton>
-          <DrawerButton>Data Storage</DrawerButton>
-          <DrawerButton>External Components</DrawerButton>
-          <DrawerButton>Laptop Accessories</DrawerButton>
-          <DrawerButton>Monitors</DrawerButton>
-          <DrawerButton>Networking Products</DrawerButton>
-          <DrawerButton>Power Strips & Surge Protectors</DrawerButton>
-          <DrawerButton>Printers</DrawerButton>
+        <CollapsableList name="Computers" link="computers">
+          <DrawerButton link="peripherals">
+            Computer Accessories & Peripherals
+          </DrawerButton>
+          <DrawerButton link="components">Computer Components</DrawerButton>
+          <DrawerButton link="computers-and-tablets">
+            Computers & Tablets
+          </DrawerButton>
+          <DrawerButton link="storage">Data Storage</DrawerButton>
+          <DrawerButton link="external-components">
+            External Components
+          </DrawerButton>
+          <DrawerButton link="laptop-accessories">
+            Laptop Accessories
+          </DrawerButton>
+          <DrawerButton link="monitors">Monitors</DrawerButton>
+          <DrawerButton link="networking">Networking Products</DrawerButton>
+          <DrawerButton link="power-strips-and-surge-protectors">
+            Power Strips & Surge Protectors
+          </DrawerButton>
+          <DrawerButton link="printers">Printers</DrawerButton>
         </CollapsableList>
-        <CollapsableList name="Smart Home">
-          <DrawerButton>Smart Home Lighting</DrawerButton>
-          <DrawerButton>Smart Locks and Entry</DrawerButton>
-          <DrawerButton>Security Cameras and Systems</DrawerButton>
-          <DrawerButton>Plugs and Outlets</DrawerButton>
-          <DrawerButton>New Smart Devices</DrawerButton>
-          <DrawerButton>Heating and Cooling</DrawerButton>
-          <DrawerButton>Detectors and Sensors</DrawerButton>
-          <DrawerButton>Pet</DrawerButton>
-          <DrawerButton>Voice Assistants and Hubs</DrawerButton>
-          <DrawerButton>Kitchen</DrawerButton>
+        <CollapsableList name="Smart Home" link="smart-home">
+          <DrawerButton link="lighting">Smart Home Lighting</DrawerButton>
+          <DrawerButton link="smart locks">Smart Locks and Entry</DrawerButton>
+          <DrawerButton link="security">
+            Security Cameras and Systems
+          </DrawerButton>
+          <DrawerButton link="plugs-and-outlets">
+            Plugs and Outlets
+          </DrawerButton>
+          <DrawerButton link="smart-devices">New Smart Devices</DrawerButton>
+          <DrawerButton link="heating-and-cooling">
+            Heating and Cooling
+          </DrawerButton>
+          <DrawerButton link="detectors-and-sensors">
+            Detectors and Sensors
+          </DrawerButton>
+          <DrawerButton link="pet">Pet</DrawerButton>
+          <DrawerButton link="voice-assistants">
+            Voice Assistants and Hubs
+          </DrawerButton>
+          <DrawerButton link="kitchen">Kitchen</DrawerButton>
         </CollapsableList>
         <Category withDivider>Programs & Benefits</Category>
-        <CollapsableList name="Gift Cards">
-          <Category>Give A Gift Card</Category>
-          <DrawerButton>All gift cards</DrawerButton>
-          <DrawerButton>eGift cards</DrawerButton>
-          <DrawerButton>Gift cards by mail</DrawerButton>
-          <DrawerButton>Specialty gift cards</DrawerButton>
+        <CollapsableList name="Gift Cards" link="gifts">
+          <Category link="give">Give A Gift Card</Category>
+          <DrawerButton link="all">All gift cards</DrawerButton>
+          <DrawerButton link="egift-cards">eGift cards</DrawerButton>
+          <DrawerButton link="mail">Gift cards by mail</DrawerButton>
+          <DrawerButton link="specialty">Specialty gift cards</DrawerButton>
           <Category withDivider>Manage Your Gift Card</Category>
-          <DrawerButton>Redeem a gift card</DrawerButton>
-          <DrawerButton>View Your Balance</DrawerButton>
-          <DrawerButton>Reload Your Balance</DrawerButton>
+          <DrawerButton link="redeem">Redeem a gift card</DrawerButton>
+          <DrawerButton link="view-balance">View Your Balance</DrawerButton>
+          <DrawerButton link="reload-balance">Reload Your Balance</DrawerButton>
         </CollapsableList>
         <Category withDivider>Help & Settings</Category>
-        <DrawerButton>Sign In</DrawerButton>
-        <DrawerButton>Language</DrawerButton>
-        <DrawerButton>Customer Service</DrawerButton>
+        <DrawerButton link="login">Sign In</DrawerButton>
+        <DrawerButton link="language">Language</DrawerButton>
+        <DrawerButton link="support">Customer Service</DrawerButton>
       </List>
     </Drawer>
   );
