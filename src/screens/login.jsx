@@ -79,7 +79,7 @@ const Login = () => {
           </form>
           <Box sx={{ mt: 1, textAlign: "center" }}>
             <Link component={RouterLink} underline="none" to="/signup">
-              Don't have an account? sign up today
+              Don't have an account? Sign up today
             </Link>
           </Box>
         </Paper>
