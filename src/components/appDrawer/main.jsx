@@ -1,67 +1,8 @@
-import {
-  Drawer,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  Divider,
-  Typography,
-  Collapse,
-} from "@mui/material";
-import { useAppDrawer } from "../context/appDrawer";
-import ExpandLess from "@mui/icons-material/ExpandLess";
-import ExpandMore from "@mui/icons-material/ExpandMore";
-import React from "react";
-
-const Category = ({ children, withDivider, isCollapsable }) => {
-  return (
-    <>
-      {withDivider && <Divider />}
-      <ListItem>
-        <ListItemText
-          disableTypography
-          {...(isCollapsable ? { sx: { pl: 2 } } : null)}
-        >
-          <Typography variant="h6" component="label">
-            {children}
-          </Typography>
-        </ListItemText>
-      </ListItem>
-    </>
-  );
-};
-
-const DrawerButton = ({ children, isCollapsable }) => {
-  return (
-    <ListItem disablePadding>
-      <ListItemButton>
-        <ListItemText
-          primary={children}
-          {...(isCollapsable ? { sx: { pl: 2 } } : null)}
-        />
-      </ListItemButton>
-    </ListItem>
-  );
-};
-
-const CollapsableList = ({ name, children }) => {
-  const [open, setOpen] = React.useState(false);
-  return (
-    <>
-      <ListItemButton onClick={() => setOpen(!open)}>
-        <ListItemText primary={name} />
-        {open ? <ExpandLess /> : <ExpandMore />}
-      </ListItemButton>
-      <Collapse in={open} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          {React.Children.map(children, (child) =>
-            React.cloneElement(child, { isCollapsable: true })
-          )}
-        </List>
-      </Collapse>
-    </>
-  );
-};
+import { Drawer, List } from "@mui/material";
+import { useAppDrawer } from "../../context/appDrawer";
+import CollapsableList from "./collapsableList";
+import DrawerButton from "./drawerButton";
+import Category from "./category";
 
 const AppDrawer = () => {
   const [drawerOn, setDrawerOn] = useAppDrawer();
