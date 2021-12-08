@@ -2,36 +2,6 @@ import { Button, TextField, Typography, Box, Link } from "@mui/material";
 import FormBox from "../components/common/formBox";
 import { Link as RouterLink } from "react-router-dom";
 
-/*
-<TextField
-  type="text"
-  id="firstName"
-  variant="outlined"
-  label="First Name"
-  margin="normal"
-  required
-  fullWidth
-/>
-<TextField
-  type="text"
-  id="lastName"
-  variant="outlined"
-  label="Last Name"
-  margin="normal"
-  required
-  fullWidth
-/>
-<TextField
-  type="password"
-  id="confirmPassword"
-  variant="outlined"
-  label="Confirm password"
-  margin="normal"
-  required
-  fullWidth
-/>
-*/
-
 const Login = () => {
   return (
     <FormBox>
