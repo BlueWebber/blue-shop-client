@@ -1,4 +1,4 @@
-import { Box, Container, Paper } from "react";
+import { Box, Container, Paper } from "@mui/material";
 
 const FormBox = ({ children }) => {
   return (
