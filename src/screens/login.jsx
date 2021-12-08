@@ -5,7 +5,9 @@ import {
   Paper,
   Typography,
   Box,
+  Link,
 } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
 
 /*
 <TextField
@@ -75,6 +77,11 @@ const Login = () => {
               Submit
             </Button>
           </form>
+          <Box sx={{ mt: 1, textAlign: "center" }}>
+            <Link component={RouterLink} underline="none" to="/signup">
+              Don't have an account? sign up today
+            </Link>
+          </Box>
         </Paper>
       </Container>
     </Box>
