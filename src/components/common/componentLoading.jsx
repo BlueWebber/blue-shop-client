@@ -1,10 +1,10 @@
 import { CircularProgress } from "@mui/material";
 
-const ComponentLoading = ({ center }) => {
+const ComponentLoading = ({ center, size = 52 }) => {
   return (
     <CircularProgress
       color="inherit"
-      size={52}
+      size={size}
       {...(center
         ? {
             sx: {
