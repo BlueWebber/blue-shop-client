@@ -19,6 +19,9 @@ const ThemeProvider = ({ children }) => {
       createTheme({
         palette: {
           mode: theme,
+          background: {
+            appBar: theme === "dark" ? "#0a0a0a" : "#1565c0",
+          },
           text: {
             navButton: "#fff",
           },

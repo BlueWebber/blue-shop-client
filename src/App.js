@@ -3,6 +3,7 @@ import Login from "./screens/login";
 import Signup from "./screens/signup";
 import AppWrapper from "./components/appWrapper";
 import NavBar from "./components/navBar";
+import AppBar from "./components/appBar";
 import AppDrawer from "./components/appDrawer";
 import Main from "./components/main";
 
@@ -10,6 +11,7 @@ function App() {
   return (
     <AppWrapper>
       <Main>
+        <AppBar />
         <NavBar />
         <AppDrawer />
         <Routes>
