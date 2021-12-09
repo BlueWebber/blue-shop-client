@@ -18,7 +18,14 @@ const navItems = [
 const AppBar = () => {
   const [, setDrawerOn] = useAppDrawer();
   return (
-    <AppBarComp position="sticky" sx={{ mb: 1 }} component="nav">
+    <AppBarComp
+      position="sticky"
+      sx={{
+        mb: 1,
+        backgroundColor: (theme) => theme.palette.background.navBar,
+      }}
+      component="nav"
+    >
       <Toolbar variant="dense">
         <IconButton
           size="large"

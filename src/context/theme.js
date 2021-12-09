@@ -21,6 +21,7 @@ const ThemeProvider = ({ children }) => {
           mode: theme,
           background: {
             appBar: theme === "dark" ? "#0a0a0a" : "#1565c0",
+            navBar: theme === "dark" ? "#121212" : "#1976d2",
           },
           text: {
             navButton: "#fff",
