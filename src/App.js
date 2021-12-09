@@ -9,6 +9,7 @@ import Main from "./components/main";
 import ComponentLoading from "./components/common/componentLoading";
 
 const Signup = React.lazy(() => import("./screens/signup"));
+const Theme = React.lazy(() => import("./screens/theme"));
 
 function App() {
   return (
@@ -17,18 +18,14 @@ function App() {
         <AppBar />
         <NavBar />
         <AppDrawer />
-        <Routes>
-          <Route path="/" element={<Navigate to="/login" />} />
-          <Route path="/login" element={<Login />} />
-          <Route
-            path="/signup"
-            element={
-              <React.Suspense fallback={<ComponentLoading center />}>
-                <Signup />
-              </React.Suspense>
-            }
-          />
-        </Routes>
+        <React.Suspense fallback={<ComponentLoading center />}>
+          <Routes>
+            <Route path="/" element={<Navigate to="/login" />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/theme" element={<Theme />} />
+          </Routes>
+        </React.Suspense>
       </Main>
     </AppWrapper>
   );
