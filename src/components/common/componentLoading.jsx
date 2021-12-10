@@ -4,7 +4,10 @@ import React from "react";
 const ComponentLoading = ({ center, size = 52, delay = 500 }) => {
   const [visible, setVisible] = React.useState(false);
   React.useEffect(() => {
-    setTimeout(() => setVisible(true), delay);
+    const timeout = setTimeout(() => setVisible(true), delay);
+    return () => {
+      clearTimeout(timeout);
+    };
   }, [delay]);
 
   if (!visible) return <></>;
