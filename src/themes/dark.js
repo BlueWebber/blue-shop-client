@@ -14,7 +14,7 @@ let darkTheme = {
       hover: "#7b7b7b",
     },
   },
-  name: "dark",
+  name: "Dark",
   id: "dark",
 };
 

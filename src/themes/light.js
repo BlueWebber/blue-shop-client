@@ -14,7 +14,7 @@ let lightTheme = {
       hover: "#a8a8a8",
     },
   },
-  name: "light",
+  name: "Light",
   id: "light",
 };
 
