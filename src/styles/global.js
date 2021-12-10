@@ -1,6 +1,6 @@
-import { createGlobalStyle } from "styled-components";
+import { css } from "@emotion/react";
 
-const GlobalStyle = createGlobalStyle`
+const GlobalStyle = (theme) => css`
   /* Scroll Width */
   ::-webkit-scrollbar {
     width: 7px;
@@ -14,14 +14,14 @@ const GlobalStyle = createGlobalStyle`
 
   /* Scroll Handle */
   ::-webkit-scrollbar-thumb {
-    background: #686868;
+    background-color: ${theme.palette.scroll.base};
     border-radius: 10px;
     margin-top: 5px;
   }
 
   /* Scroll on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #7b7b7b;
+    background-color: ${theme.palette.scroll.hover};
   }
 `;
 

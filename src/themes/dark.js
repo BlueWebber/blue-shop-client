@@ -9,6 +9,10 @@ let darkTheme = {
       appBar: "#0a0a0a",
       navBar: "#121212",
     },
+    scroll: {
+      base: "#686868",
+      hover: "#7b7b7b",
+    },
   },
   id: "dark",
 };
