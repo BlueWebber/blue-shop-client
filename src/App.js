@@ -10,6 +10,10 @@ import ComponentLoading from "./components/common/componentLoading";
 
 const Signup = React.lazy(() => import("./screens/signup"));
 const Theme = React.lazy(() => import("./screens/theme"));
+const ThemeCreator = React.lazy(() => import("./screens/themeCreator"));
+const ThemeSelectorWrapper = React.lazy(() =>
+  import("./components/themeSelectorWrapper")
+);
 
 function App() {
   return (
@@ -23,7 +27,10 @@ function App() {
             <Route path="/" element={<Navigate to="/login" />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/theme" element={<Theme />} />
+            <Route path="/theme" element={<ThemeSelectorWrapper />}>
+              <Route path="" element={<Theme />} />
+              <Route path="create" element={<ThemeCreator />} />
+            </Route>
           </Routes>
         </React.Suspense>
       </Main>
