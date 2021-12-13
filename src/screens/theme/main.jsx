@@ -1,0 +1,135 @@
+import {
+  Container,
+  TextField,
+  Paper,
+  Box,
+  Button,
+  Typography,
+  InputAdornment,
+  Grid,
+} from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import React from "react";
+import lightTheme from "../../themes/light";
+import darkTheme from "../../themes/dark";
+import { useTheme } from "../../context/theme";
+import useDebounce from "../../hooks/useDebouce";
+import ThemeCard from "./themeCard";
+import { styled } from "@mui/material/styles";
+
+const StyledForm = styled("form")(
+  ({ theme }) => `
+  display: flex;
+  flex-grow: 1;
+  margin-right: ${theme.spacing(1)};
+`
+);
+
+// remember to remove the option to edit/delete default themes!
+const defaultThemes = [lightTheme, darkTheme];
+
+const Theme = () => {
+  const [currentThemeId, setThemeId] = useTheme();
+  const [themes, setThemes] = React.useState(defaultThemes);
+  const [input, setInput] = React.useState(null);
+  const search = useDebounce(input, 300);
+
+  React.useEffect(() => {
+    if (search === null) {
+      return;
+    }
+
+    search
+      ? setThemes(
+          defaultThemes.filter((theme) =>
+            theme.name.match(new RegExp(search, "i"))
+          )
+        )
+      : setThemes(defaultThemes);
+  }, [search]);
+
+  return (
+    <Container>
+      <Paper sx={{ p: 1, mt: 1 }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <StyledForm
+            onSubmit={(e) => {
+              e.preventDefault();
+              document.activeElement.blur();
+            }}
+          >
+            <TextField
+              fullWidth
+              type="search"
+              placeholder="Search your themes..."
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
+              value={input || ""}
+              onChange={({ target }) => setInput(target.value)}
+            />
+          </StyledForm>
+          <Button
+            variant="contained"
+            sx={{ flexGrow: 0.05, fontWeight: 500, fontSize: "1rem" }}
+          >
+            Create
+          </Button>
+        </Box>
+        <Paper
+          variant="outlined"
+          sx={{
+            maxHeight: "65vh",
+            minHeight: "31vh",
+            overflowY: "scroll",
+            mt: 2,
+            p: 1,
+            backgroundColor: "unset",
+          }}
+        >
+          <Grid
+            container
+            rowSpacing={5}
+            columnSpacing={5}
+            justifyContent="center"
+          >
+            {themes.length ? (
+              themes.map((theme) => (
+                <Grid
+                  item
+                  xs={12}
+                  sm={11.5}
+                  md={6}
+                  elevation={5}
+                  key={theme.id}
+                >
+                  <ThemeCard
+                    theme={theme}
+                    selected={theme.id === currentThemeId}
+                    setThemeId={setThemeId}
+                  />
+                </Grid>
+              ))
+            ) : (
+              <Grid item>
+                <Typography disabled>No results were found</Typography>
+              </Grid>
+            )}
+          </Grid>
+        </Paper>
+      </Paper>
+    </Container>
+  );
+};
+
+export default Theme;
