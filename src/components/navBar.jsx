@@ -19,7 +19,7 @@ const AppBar = () => {
   const [, setDrawerOn] = useAppDrawer();
   return (
     <AppBarComp
-      position="sticky"
+      position="static"
       sx={{
         mb: 1,
         backgroundColor: (theme) => theme.palette.background.navBar,
@@ -32,7 +32,7 @@ const AppBar = () => {
           edge="start"
           color="inherit"
           aria-label="menu"
-          sx={{ mr: 2 }}
+          sx={{ mr: 2, color: (theme) => theme.palette.text.navButton }}
           onClick={() => setDrawerOn(true)}
         >
           <MenuIcon />
