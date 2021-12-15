@@ -17,18 +17,15 @@ import ThemeCard from "./themeCard";
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 
-const StyledForm = styled("form")(
-  ({ theme }) => `
+const StyledForm = styled("form")`
   display: flex;
   flex-grow: 1;
-  margin-right: ${theme.spacing(1)};
-`
-);
+`;
 
 // remember to remove the option to edit/delete default themes!
 const defaultThemes = [lightTheme, darkTheme];
 
-const Theme = () => {
+const Theme = ({ setBaseTheme, baseThemeId }) => {
   const [currentThemeId, setThemeId] = useTheme();
   const [themes, setThemes] = React.useState(defaultThemes);
   const [input, setInput] = React.useState(null);
@@ -78,14 +75,21 @@ const Theme = () => {
             onChange={({ target }) => setInput(target.value)}
           />
         </StyledForm>
-        <Button
-          variant="contained"
-          component={Link}
-          to="create"
-          sx={{ flexGrow: 0.05, fontWeight: 500, fontSize: "1rem" }}
-        >
-          Create
-        </Button>
+        {!baseThemeId && (
+          <Button
+            variant="contained"
+            component={Link}
+            to="create"
+            sx={{
+              flexGrow: 0.05,
+              fontWeight: 500,
+              fontSize: "1rem",
+              ml: 1,
+            }}
+          >
+            Create
+          </Button>
+        )}
       </Box>
       <Paper
         variant="outlined"
@@ -109,8 +113,12 @@ const Theme = () => {
               <Grid item xs={12} sm={11.5} md={6} elevation={5} key={theme.id}>
                 <ThemeCard
                   theme={theme}
-                  selected={theme.id === currentThemeId}
-                  setThemeId={setThemeId}
+                  selected={
+                    baseThemeId
+                      ? theme.id === baseThemeId
+                      : theme.id === currentThemeId
+                  }
+                  setThemeId={setBaseTheme || setThemeId}
                 />
               </Grid>
             ))
