@@ -30,7 +30,11 @@ const ThemeCard = ({ theme, selected, setThemeId }) => {
     <Card
       raised
       {...(selected && {
-        sx: { backgroundColor: (theme) => theme.palette.primary.dark },
+        sx: {
+          backgroundColor: (theme) => theme.palette.primary.dark,
+          background: (theme) =>
+            `linear-gradient(to top right, ${theme.palette.primary.main}, ${theme.palette.secondary.dark} 150%)`,
+        },
       })}
     >
       <ThemeProvider theme={theme}>
