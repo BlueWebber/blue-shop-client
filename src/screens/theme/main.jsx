@@ -14,7 +14,7 @@ import darkTheme from "../../themes/dark";
 import { useTheme } from "../../context/theme";
 import useDebounce from "../../hooks/useDebouce";
 import ThemeCard from "./themeCard";
-import { styled } from "@mui/material/styles";
+import { styled, createTheme } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 
 const StyledForm = styled("form")`
@@ -25,9 +25,20 @@ const StyledForm = styled("form")`
 // remember to remove the option to edit/delete default themes!
 const defaultThemes = [lightTheme, darkTheme];
 
-const Theme = ({ setBaseTheme, baseThemeId }) => {
+const Theme = ({ setBaseTheme, baseThemeId, themes: initialThemes }) => {
   const [currentThemeId, setThemeId] = useTheme();
-  const [themes, setThemes] = React.useState(defaultThemes);
+  // add the logic to conditionally fetch themes from the server
+  // based on whether "initialThemes" is passed by the parent or not
+  const [themes, setThemes] = React.useState(() =>
+    initialThemes
+      ? initialThemes
+      : [
+          ...defaultThemes,
+          ...(JSON.parse(localStorage.getItem("themes")) || []).map((theme) =>
+            createTheme(theme)
+          ),
+        ]
+  );
   const [input, setInput] = React.useState(null);
   const search = useDebounce(input, 300);
 
@@ -38,12 +49,12 @@ const Theme = ({ setBaseTheme, baseThemeId }) => {
 
     search
       ? setThemes(
-          defaultThemes.filter((theme) =>
+          (initialThemes || defaultThemes).filter((theme) =>
             theme.name.match(new RegExp(search, "i"))
           )
         )
-      : setThemes(defaultThemes);
-  }, [search]);
+      : setThemes(initialThemes || defaultThemes);
+  }, [search, initialThemes]);
 
   return (
     <>

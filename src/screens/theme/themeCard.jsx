@@ -142,3 +142,4 @@ const ThemeCard = ({ theme, selected, setThemeId }) => {
 };
 
 export default ThemeCard;
+export { navBackgroundImg };

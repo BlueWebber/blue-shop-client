@@ -7,7 +7,7 @@ const AppWrapper = ({ children }) => {
   return (
     <>
       <ThemeProvider>
-        <GlobalStyles styles={GlobalStyle} />
+        <GlobalStyles styles={GlobalStyle} enableColorScheme />
         <CssBaseline />
         <AppDrawerProvider>{children}</AppDrawerProvider>
       </ThemeProvider>

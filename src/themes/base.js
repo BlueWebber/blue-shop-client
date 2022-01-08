@@ -10,6 +10,7 @@ const theme = {
       textTransform: "none",
     },
   },
+  isDefault: true,
 };
 
 export default theme;

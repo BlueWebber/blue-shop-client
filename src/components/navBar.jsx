@@ -10,8 +10,8 @@ import { Link } from "react-router-dom";
 
 const navItems = [
   { name: "Offers", link: "/offers" },
-  { name: "Customer Support", link: "/support" },
-  { name: "Gift Cards", link: "/gifts" },
+  { name: "Customer\u00A0Support", link: "/support" },
+  { name: "Gift\u00A0Cards", link: "/gifts" },
   { name: "Sell", link: "/sell" },
 ];
 
