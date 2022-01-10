@@ -33,14 +33,16 @@ let ButtonRow = ({ color, theme, setTheme }) => {
   );
 };
 
-ButtonRow = React.memo(ButtonRow, (prevProps, nextProps) => {
-  prevProps.theme.palette.text.primary ===
-    nextProps.theme.palette.text.primary &&
+ButtonRow = React.memo(
+  ButtonRow,
+  (prevProps, nextProps) =>
+    prevProps.theme.palette.text.primary ===
+      nextProps.theme.palette.text.primary &&
     _.isEqual(
       prevProps.theme.palette[nextProps.color],
       nextProps.theme.palette[nextProps.color]
-    );
-});
+    )
+);
 
 let DisabledButtonRow = ({ theme, setTheme }) => {
   return (

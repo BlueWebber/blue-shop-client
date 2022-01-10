@@ -21,6 +21,9 @@ const Menu = ({ themeId, handleEdit, handleDelete, selected }) => {
   };
   const open = Boolean(anchorEl);
 
+  const editHandler = () => handleEdit(themeId);
+  const deleteHandler = () => handleDelete(themeId);
+
   return (
     <>
       <IconButton
@@ -40,12 +43,12 @@ const Menu = ({ themeId, handleEdit, handleDelete, selected }) => {
         open={open}
         onClose={handleClose}
       >
-        <MenuItem onClick={() => callBoth(handleClose, handleEdit)}>
+        <MenuItem onClick={() => callBoth(handleClose, editHandler)}>
           <MenuIcon icon={EditIcon} />
           Edit
         </MenuItem>
         <MenuItem
-          onClick={() => callBoth(handleClose, handleDelete)}
+          onClick={() => callBoth(handleClose, deleteHandler)}
           sx={{ color: (theme) => theme.palette.error.main }}
         >
           <MenuIcon icon={DeleteIcon} />

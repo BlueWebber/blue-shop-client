@@ -16,6 +16,7 @@ import useDebounce from "../../hooks/useDebouce";
 import ThemeCard from "./themeCard";
 import { styled, createTheme } from "@mui/material/styles";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 const StyledForm = styled("form")`
   display: flex;
@@ -25,22 +26,20 @@ const StyledForm = styled("form")`
 // remember to remove the option to edit/delete default themes!
 const defaultThemes = [lightTheme, darkTheme];
 
-const Theme = ({ setBaseTheme, baseThemeId, themes: initialThemes }) => {
-  const [currentThemeId, setThemeId] = useTheme();
-  // add the logic to conditionally fetch themes from the server
-  // based on whether "initialThemes" is passed by the parent or not
-  const [themes, setThemes] = React.useState(() =>
-    initialThemes
-      ? initialThemes
-      : [
-          ...defaultThemes,
-          ...(JSON.parse(localStorage.getItem("themes")) || []).map((theme) =>
-            createTheme(theme)
-          ),
-        ]
-  );
+const getThemes = () => JSON.parse(localStorage.getItem("themes"));
+const setStorageThemes = (themes) =>
+  localStorage.setItem("themes", JSON.stringify(themes));
+
+const Theme = ({ setBaseTheme, baseTheme, baseThemeId }) => {
+  const [theme, setTheme] = useTheme();
+  const [initialThemes, setInitialThemes] = React.useState(() => [
+    ...defaultThemes,
+    ...(getThemes() || []).map((theme) => createTheme(theme)),
+  ]);
+  const [themes, setThemes] = React.useState(initialThemes);
   const [input, setInput] = React.useState(null);
   const search = useDebounce(input, 300);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     if (search === null) {
@@ -49,12 +48,32 @@ const Theme = ({ setBaseTheme, baseThemeId, themes: initialThemes }) => {
 
     search
       ? setThemes(
-          (initialThemes || defaultThemes).filter((theme) =>
-            theme.name.match(new RegExp(search, "i"))
+          initialThemes.filter((filterTheme) =>
+            filterTheme.name.match(new RegExp(search, "i"))
           )
         )
-      : setThemes(initialThemes || defaultThemes);
-  }, [search, initialThemes]);
+      : setThemes(initialThemes);
+  }, [initialThemes, search]);
+
+  React.useLayoutEffect(() => {
+    if (baseThemeId) {
+      setBaseTheme(initialThemes.find((theme) => theme.id === baseThemeId));
+    }
+  }, [baseThemeId, setBaseTheme, initialThemes]);
+
+  const handleEdit = (themeId) => {
+    navigate("create", { state: { themeId } });
+  };
+  const handleDelete = (themeId) => {
+    const newThemes = initialThemes.filter((theme) => theme.id !== themeId);
+    const customThemes = newThemes.filter(
+      (theme) =>
+        theme.id !== defaultThemes[0].id && theme.id !== defaultThemes[1].id
+    );
+    setThemes(newThemes);
+    setInitialThemes(newThemes);
+    setStorageThemes(customThemes);
+  };
 
   return (
     <>
@@ -86,7 +105,7 @@ const Theme = ({ setBaseTheme, baseThemeId, themes: initialThemes }) => {
             onChange={({ target }) => setInput(target.value)}
           />
         </StyledForm>
-        {!baseThemeId && (
+        {!baseTheme && (
           <Button
             variant="contained"
             component={Link}
@@ -120,16 +139,26 @@ const Theme = ({ setBaseTheme, baseThemeId, themes: initialThemes }) => {
           justifyContent="center"
         >
           {themes.length ? (
-            themes.map((theme) => (
-              <Grid item xs={12} sm={11.5} md={6} elevation={5} key={theme.id}>
+            themes.map((mapTheme) => (
+              <Grid
+                item
+                xs={12}
+                sm={11.5}
+                md={6}
+                elevation={5}
+                key={mapTheme.id}
+              >
                 <ThemeCard
-                  theme={theme}
+                  theme={mapTheme}
                   selected={
-                    baseThemeId
-                      ? theme.id === baseThemeId
-                      : theme.id === currentThemeId
+                    baseTheme
+                      ? mapTheme.id === baseTheme.id
+                      : mapTheme.id === theme.id
                   }
-                  setThemeId={setBaseTheme || setThemeId}
+                  setTheme={setBaseTheme || setTheme}
+                  selectorMode={baseTheme}
+                  onEdit={handleEdit}
+                  onDelete={handleDelete}
                 />
               </Grid>
             ))

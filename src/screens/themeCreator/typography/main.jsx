@@ -1,10 +1,9 @@
 import React from "react";
 import { Box, Paper, Typography, Divider } from "@mui/material";
 import ColorPicker from "../colorPicker";
-import useChangeOnUnmount from "../../../hooks/useChangeOnUnmount";
-import useLocalStateObj from "../../../hooks/useLocalStateObj";
 import { ThemeProvider } from "@mui/material/styles";
 import Icons from "./icons";
+import { useThemeCreator } from "../../../context/themeCreator";
 
 const typoExamples = [
   {
@@ -38,14 +37,19 @@ const typoExamples = [
     color: "palette.text.disabled",
     textColor: "text.disabled",
   },
+  {
+    text: "bottom navBar",
+    variant: "body1",
+    color: "palette.text.navButton",
+    textColor: "text.navButton",
+  },
 ];
 
-const TypographyExample = ({ theme, setTheme }) => {
-  const [typoTheme, setTypoTheme] = useLocalStateObj(theme);
-  useChangeOnUnmount(typoTheme, setTheme);
+const TypographyExample = () => {
+  const [theme, setTheme] = useThemeCreator();
 
   return (
-    <ThemeProvider theme={typoTheme}>
+    <ThemeProvider theme={theme}>
       <Paper elevation={0} sx={{ backgroundColor: "inherit", padding: 0 }}>
         <Box
           sx={{
@@ -76,8 +80,8 @@ const TypographyExample = ({ theme, setTheme }) => {
                   {color && (
                     <ColorPicker
                       themeValue={color}
-                      theme={typoTheme}
-                      setTheme={setTypoTheme}
+                      theme={theme}
+                      setTheme={setTheme}
                     />
                   )}
                 </Box>

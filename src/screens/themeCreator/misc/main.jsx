@@ -1,8 +1,7 @@
 import React from "react";
 import { Grid, Typography, Divider } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
-import useChangeOnUnmount from "../../../hooks/useChangeOnUnmount";
-import useLocalStateObj from "../../../hooks/useLocalStateObj";
+import { useThemeCreator } from "../../../context/themeCreator";
 import ControlledColorPicker from "../controlledColorPicker";
 import ColorPicker from "../colorPicker";
 import _ from "lodash";
@@ -41,9 +40,8 @@ const createShadows = (
   `0px 11px 15px -7px ${color0},0px 24px 38px 3px ${color1},0px 9px 46px 8px ${color2}`,
 ];
 
-const Misc = ({ theme, setTheme }) => {
-  const [miscTheme, setMiscTheme] = useLocalStateObj(theme);
-  useChangeOnUnmount(miscTheme, setTheme);
+const Misc = () => {
+  const [theme, setTheme] = useThemeCreator();
 
   // fix the regex
   const [shadowColor, setShadowColor] = React.useState(() =>
@@ -56,22 +54,21 @@ const Misc = ({ theme, setTheme }) => {
     const newColor = `rgba(${color.r},${color.g},${color.b},${color.a})`;
     const newShadows = _.cloneDeep(shadowColor);
     newShadows[index] = newColor;
-    const newTheme = _.cloneDeep(miscTheme);
+    const newTheme = _.cloneDeep(theme);
     newTheme.shadows = createShadows(...shadowColor);
     setShadowColor(newShadows);
-    setMiscTheme(newTheme);
+    setTheme(newTheme);
   };
 
   const handleColorChange = (index) => (color) => changeShadows(index, color);
 
   return (
-    <ThemeProvider theme={miscTheme}>
+    <ThemeProvider theme={theme}>
       <Grid
         container
         sx={{
           textAlign: "center",
         }}
-        rowSpacing={5}
       >
         <GridItem>
           <PaperContainer elevation={10}>
@@ -107,8 +104,8 @@ const Misc = ({ theme, setTheme }) => {
         </GridItem>
         <GridItem>
           <ColorPicker
-            theme={miscTheme}
-            setTheme={setMiscTheme}
+            theme={theme}
+            setTheme={setTheme}
             themeValue="palette.divider"
             withoutAlpha={false}
             colorType="rgb"

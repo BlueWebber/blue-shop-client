@@ -25,7 +25,14 @@ const flexRow = {
   justifyContent: "space-between",
 };
 
-const ThemeCard = ({ theme, selected, setThemeId }) => {
+const ThemeCard = ({
+  theme,
+  selected,
+  setTheme,
+  selectorMode,
+  onEdit,
+  onDelete,
+}) => {
   return (
     <Card
       raised
@@ -121,7 +128,7 @@ const ThemeCard = ({ theme, selected, setThemeId }) => {
         <Button
           variant="contained"
           disabled={selected}
-          onClick={() => setThemeId(theme.id)}
+          onClick={() => setTheme(theme)}
           sx={{
             "&:disabled": {
               color: (theme) => theme.palette.grey[800],
@@ -130,12 +137,14 @@ const ThemeCard = ({ theme, selected, setThemeId }) => {
         >
           {selected ? "Selected" : "Select"}
         </Button>
-        <Menu
-          themeId={theme.id}
-          handleEdit={() => console.log("edit")}
-          handleDelete={() => console.log("delete")}
-          selected={selected}
-        />
+        {!selectorMode && !theme.isDefault && (
+          <Menu
+            themeId={theme.id}
+            handleEdit={onEdit}
+            handleDelete={onDelete}
+            selected={selected}
+          />
+        )}
       </CardActions>
     </Card>
   );

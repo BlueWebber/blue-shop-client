@@ -1,9 +1,8 @@
 import { Box, Paper, Typography } from "@mui/material";
 import ColorPicker from "./colorPicker";
 import { ThemeProvider } from "@mui/material/styles";
-import useLocalStateObj from "../../hooks/useLocalStateObj";
-import useChangeOnUnmount from "../../hooks/useChangeOnUnmount";
 import { navBackgroundImg } from "../theme";
+import { useThemeCreator } from "../../context/themeCreator";
 
 const backgrounds = [
   {
@@ -31,12 +30,11 @@ backgrounds.map(
   (background) => (background.value = "palette.background." + background.bg)
 );
 
-const Backgrounds = ({ theme, setTheme }) => {
-  const [bgTheme, setBgTheme] = useLocalStateObj(theme);
-  useChangeOnUnmount(bgTheme, setTheme);
+const Backgrounds = () => {
+  const [theme, setTheme] = useThemeCreator();
 
   return (
-    <ThemeProvider theme={bgTheme}>
+    <ThemeProvider theme={theme}>
       {backgrounds.map(({ label, bg, bgImg, value }) => (
         <Box
           sx={{
@@ -46,6 +44,7 @@ const Backgrounds = ({ theme, setTheme }) => {
             alignItems: "center",
             mt: 1,
           }}
+          key={label}
         >
           <Paper
             sx={{
@@ -62,11 +61,7 @@ const Backgrounds = ({ theme, setTheme }) => {
               {label}
             </Typography>
           </Paper>
-          <ColorPicker
-            theme={bgTheme}
-            setTheme={setBgTheme}
-            themeValue={value}
-          />
+          <ColorPicker theme={theme} setTheme={setTheme} themeValue={value} />
         </Box>
       ))}
     </ThemeProvider>

@@ -10,9 +10,9 @@ import {
   DialogActions,
   TextField,
 } from "@mui/material";
-import { Navigate } from "react-router";
+import { useNavigate } from "react-router";
 import _ from "lodash";
-import { useThemeCreatorSaving } from "../../context/themeCreatorSaving";
+import { useThemeCreator } from "../../context/themeCreator";
 
 const DialogText = ({ children }) => {
   return (
@@ -20,27 +20,86 @@ const DialogText = ({ children }) => {
   );
 };
 
-const BottomControls = ({ theme }) => {
-  const [cancelled, setCancelled] = React.useState(false);
-  const [saveOpen, setSaveOpen] = React.useState(false);
+const generateUUID = () => {
+  const S4 = () =>
+    (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+  return (
+    S4() +
+    S4() +
+    "-" +
+    S4() +
+    "-" +
+    S4() +
+    "-" +
+    S4() +
+    "-" +
+    S4() +
+    S4() +
+    S4()
+  );
+};
+
+let BottomControls = ({
+  theme,
+  saveOpen,
+  setSaveOpen,
+  isEditting,
+  baseThemeId,
+}) => {
+  const navigate = useNavigate();
   const [cancelOpen, setCancelOpen] = React.useState(false);
   const [themeName, setThemeName] = React.useState(theme.name);
-  const [, setIsSaving] = useThemeCreatorSaving();
 
+  React.useEffect(() => {
+    setThemeName(theme.name);
+  }, [theme.name]);
+
+  const cancel = () => navigate("/theme");
   const handleCancelClose = () => setCancelOpen(false);
-  const handleSaveClose = () => {
-    setSaveOpen(false);
-    setIsSaving(false);
-  };
+  const handleSaveClose = () => setSaveOpen(false);
 
   const createTheme = () => {
     // replace this with an API call later.
     const newTheme = _.cloneDeep(theme);
     newTheme.name = themeName;
-    newTheme.id = themeName;
+    newTheme.id = generateUUID();
+    newTheme.base = baseThemeId;
+    if (newTheme.isDefault) {
+      newTheme.isDefault = false;
+    }
     const themes = JSON.parse(localStorage.getItem("themes")) || [];
     themes.push(newTheme);
     localStorage.setItem("themes", JSON.stringify(themes));
+  };
+
+  const editTheme = () => {
+    // also replace this with an API call
+    const themes = JSON.parse(localStorage.getItem("themes"));
+    const newTheme = _.cloneDeep(theme);
+    newTheme.name = themeName;
+    const newThemes = themes.map((mapTheme) =>
+      mapTheme.id === theme.id ? newTheme : mapTheme
+    );
+    localStorage.setItem("themes", JSON.stringify(newThemes));
+  };
+
+  const handleAction = () => {
+    handleSaveClose();
+    cancel();
+  };
+
+  const handleSave = () => {
+    createTheme();
+    handleAction();
+  };
+
+  const handleEdit = () => {
+    editTheme();
+    handleAction();
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") handleSave();
   };
 
   return (
@@ -59,14 +118,8 @@ const BottomControls = ({ theme }) => {
         >
           Cancel
         </Button>
-        <Button
-          variant="contained"
-          onClick={() => {
-            setSaveOpen(true);
-            setIsSaving(true);
-          }}
-        >
-          Create
+        <Button variant="contained" onClick={() => setSaveOpen(true)}>
+          {isEditting ? "Save" : "Create"}
         </Button>
       </Box>
       <Dialog open={cancelOpen} onClose={handleCancelClose}>
@@ -83,7 +136,7 @@ const BottomControls = ({ theme }) => {
           <Button
             onClick={() => {
               handleCancelClose();
-              setCancelled(true);
+              cancel();
             }}
           >
             Yes
@@ -93,7 +146,7 @@ const BottomControls = ({ theme }) => {
       <Dialog open={saveOpen} onClose={handleSaveClose}>
         <DialogTitle>Create theme</DialogTitle>
         <DialogContent>
-          <DialogText>Enter your new theme's name</DialogText>
+          <DialogText>Enter your theme's name</DialogText>
           <TextField
             autoFocus
             margin="dense"
@@ -101,30 +154,39 @@ const BottomControls = ({ theme }) => {
             variant="standard"
             value={themeName}
             onChange={(e) => setThemeName(e.target.value)}
+            onKeyPress={handleKeyPress}
           />
         </DialogContent>
         <DialogActions>
-          <Button
-            onClick={() => {
-              handleSaveClose();
-            }}
-          >
-            Cancel
-          </Button>
-          <Button
-            onClick={() => {
-              createTheme();
-              handleSaveClose();
-              setCancelled(true);
-            }}
-          >
-            Save
-          </Button>
+          <Button onClick={handleSaveClose}>Cancel</Button>
+          <Button onClick={isEditting ? handleEdit : handleSave}>Save</Button>
         </DialogActions>
       </Dialog>
-      {cancelled && <Navigate to="/theme" />}
     </>
   );
 };
 
-export default BottomControls;
+const areEqual = (prevProps, nextProps) =>
+  nextProps.tab !== "base" &&
+  nextProps.saveOpen === prevProps.saveOpen &&
+  nextProps.saveOpen !== true;
+
+BottomControls = React.memo(BottomControls, areEqual);
+
+const Wrapper = ({ tab, isEditting, baseThemeId }) => {
+  const [theme] = useThemeCreator();
+  const [saveOpen, setSaveOpen] = React.useState(false);
+
+  return (
+    <BottomControls
+      theme={theme}
+      saveOpen={saveOpen}
+      setSaveOpen={setSaveOpen}
+      tab={tab}
+      isEditting={isEditting}
+      baseThemeId={baseThemeId}
+    />
+  );
+};
+
+export default Wrapper;
