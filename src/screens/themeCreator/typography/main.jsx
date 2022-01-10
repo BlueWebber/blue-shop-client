@@ -26,19 +26,19 @@ const typoExamples = [
     withDivider: true,
   },
   {
-    text: "body1 secondary",
+    text: "body1 Secondary",
     variant: "body1",
     color: "palette.text.secondary",
     textColor: "text.secondary",
   },
   {
-    text: "body1 disabled",
+    text: "body1 Disabled",
     variant: "body1",
     color: "palette.text.disabled",
     textColor: "text.disabled",
   },
   {
-    text: "bottom navBar",
+    text: "Bottom Navigation Bar",
     variant: "body1",
     color: "palette.text.navButton",
     textColor: "text.navButton",
