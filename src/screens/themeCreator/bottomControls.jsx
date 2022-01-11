@@ -13,6 +13,7 @@ import {
 import { useNavigate } from "react-router";
 import _ from "lodash";
 import { useThemeCreator } from "../../context/themeCreator";
+import { themes as themesLocal } from "../../localStorageKeys";
 
 const DialogText = ({ children }) => {
   return (
@@ -68,20 +69,20 @@ let BottomControls = ({
     if (newTheme.isDefault) {
       newTheme.isDefault = false;
     }
-    const themes = JSON.parse(localStorage.getItem("themes")) || [];
+    const themes = JSON.parse(localStorage.getItem(themesLocal)) || [];
     themes.push(newTheme);
-    localStorage.setItem("themes", JSON.stringify(themes));
+    localStorage.setItem(themesLocal, JSON.stringify(themes));
   };
 
   const editTheme = () => {
     // also replace this with an API call
-    const themes = JSON.parse(localStorage.getItem("themes"));
+    const themes = JSON.parse(localStorage.getItem(themesLocal));
     const newTheme = _.cloneDeep(theme);
     newTheme.name = themeName;
     const newThemes = themes.map((mapTheme) =>
       mapTheme.id === theme.id ? newTheme : mapTheme
     );
-    localStorage.setItem("themes", JSON.stringify(newThemes));
+    localStorage.setItem(themesLocal, JSON.stringify(newThemes));
     setGlobalTheme((t) => (t.id === newTheme.id ? newTheme : t));
   };
 

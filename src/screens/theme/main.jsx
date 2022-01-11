@@ -17,6 +17,7 @@ import ThemeCard from "./themeCard";
 import { styled, createTheme } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
+import { themes as themesLocal } from "../../localStorageKeys";
 
 const StyledForm = styled("form")`
   display: flex;
@@ -26,9 +27,9 @@ const StyledForm = styled("form")`
 // remember to remove the option to edit/delete default themes!
 const defaultThemes = [lightTheme, darkTheme];
 
-const getThemes = () => JSON.parse(localStorage.getItem("themes"));
+const getThemes = () => JSON.parse(localStorage.getItem(themesLocal));
 const setStorageThemes = (themes) =>
-  localStorage.setItem("themes", JSON.stringify(themes));
+  localStorage.setItem(themesLocal, JSON.stringify(themes));
 
 const Theme = ({ setBaseTheme, baseTheme }) => {
   const [theme, setTheme] = useTheme();
