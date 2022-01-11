@@ -1,4 +1,3 @@
-import { useTheme } from "@mui/material/styles";
 import { Tab, Tabs, Box, Paper } from "@mui/material";
 import React from "react";
 import ThemeSelector from "../theme";
@@ -9,6 +8,7 @@ import Misc from "./misc";
 import BottomControls from "./bottomControls";
 import { ThemeCreatorProvider } from "../../context/themeCreator";
 import { useLocation } from "react-router";
+import { useTheme } from "../../context/theme";
 
 const TabPanel = ({ children, tab, value }) => {
   return <Box sx={{ m: 1 }}>{tab === value && children}</Box>;
@@ -17,7 +17,7 @@ const TabPanel = ({ children, tab, value }) => {
 const ThemeCreator = () => {
   const location = useLocation();
   const edittingThemeId = location?.state?.themeId;
-  const theme = useTheme();
+  const [theme, setGlobalTheme] = useTheme();
   const [tab, setTab] = React.useState("base");
   const [baseTheme, setBaseTheme] = React.useState(theme);
 
@@ -75,6 +75,7 @@ const ThemeCreator = () => {
           tab={tab}
           isEditting={edittingThemeId}
           baseThemeId={baseTheme.id}
+          setGlobalTheme={setGlobalTheme}
         />
       </ThemeCreatorProvider>
     </Box>

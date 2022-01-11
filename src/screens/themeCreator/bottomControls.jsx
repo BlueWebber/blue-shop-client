@@ -45,6 +45,7 @@ let BottomControls = ({
   setSaveOpen,
   isEditting,
   baseThemeId,
+  setGlobalTheme,
 }) => {
   const navigate = useNavigate();
   const [cancelOpen, setCancelOpen] = React.useState(false);
@@ -81,6 +82,7 @@ let BottomControls = ({
       mapTheme.id === theme.id ? newTheme : mapTheme
     );
     localStorage.setItem("themes", JSON.stringify(newThemes));
+    setGlobalTheme((t) => (t.id === newTheme.id ? newTheme : t));
   };
 
   const handleAction = () => {
@@ -173,7 +175,7 @@ const areEqual = (prevProps, nextProps) =>
 
 BottomControls = React.memo(BottomControls, areEqual);
 
-const Wrapper = ({ tab, isEditting, baseThemeId }) => {
+const Wrapper = ({ tab, isEditting, baseThemeId, setGlobalTheme }) => {
   const [theme] = useThemeCreator();
   const [saveOpen, setSaveOpen] = React.useState(false);
 
@@ -185,6 +187,7 @@ const Wrapper = ({ tab, isEditting, baseThemeId }) => {
       tab={tab}
       isEditting={isEditting}
       baseThemeId={baseThemeId}
+      setGlobalTheme={setGlobalTheme}
     />
   );
 };
