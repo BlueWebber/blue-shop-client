@@ -17,6 +17,10 @@ const typoExamples = [
   { text: "H5 Heading", variant: "h5" },
   { text: "H6 Heading", variant: "h6" },
   {
+    text: "Top Navigation Bar",
+    variant: "body1",
+  },
+  {
     text: "body1 (main text)",
     variant: "body1",
   },
