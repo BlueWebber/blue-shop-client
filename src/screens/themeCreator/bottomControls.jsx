@@ -146,7 +146,7 @@ let BottomControls = ({
         </DialogActions>
       </Dialog>
       <Dialog open={saveOpen} onClose={handleSaveClose}>
-        <DialogTitle>Create theme</DialogTitle>
+        <DialogTitle>{isEditing ? "Edit" : "Create"} theme</DialogTitle>
         <DialogContent>
           <DialogText>Enter your theme's name</DialogText>
           <TextField
