@@ -1,6 +1,7 @@
 import React from "react";
-// import useMediaQuery from '@mui/material/useMediaQuery';
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
+import lightTheme from "../themes/light";
 import darkTheme from "../themes/dark";
 import values from "../localStorageKeys";
 import { createTheme } from "@mui/material/styles";
@@ -11,10 +12,15 @@ const ThemeSwitcherContext = React.createContext();
 ThemeSwitcherContext.displayName = "ThemeSwitcherContext";
 
 const ThemeProvider = ({ children }) => {
-  // useMediaQuery('(prefers-color-scheme: dark)');
+  const prefersDark = useMediaQuery("(prefers-color-scheme: dark)");
+
   const [theme, setTheme] = React.useState(() => {
     const localTheme = localStorage.getItem(currentThemeLocal);
-    return localTheme ? createTheme(JSON.parse(localTheme)) : darkTheme;
+    return localTheme
+      ? createTheme(JSON.parse(localTheme))
+      : prefersDark
+      ? darkTheme
+      : lightTheme;
   });
 
   React.useEffect(
