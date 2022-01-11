@@ -1,4 +1,5 @@
 import { Tab, Tabs, Box, Paper } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
 import React from "react";
 import ThemeSelector from "../theme";
 import TypgographyExample from "./typography";
@@ -7,21 +8,37 @@ import Backgrounds from "./backgrounds";
 import Misc from "./misc";
 import BottomControls from "./bottomControls";
 import { ThemeCreatorProvider } from "../../context/themeCreator";
-import { useLocation } from "react-router";
+import { useSearchParams, useNavigate } from "react-router-dom";
 import { useTheme } from "../../context/theme";
+import values from "../../localStorageKeys";
+
+const themesLocal = values.themes;
 
 const TabPanel = ({ children, tab, value }) => {
   return <Box sx={{ m: 1 }}>{tab === value && children}</Box>;
 };
 
 const ThemeCreator = () => {
-  const location = useLocation();
-  const editingThemeId = location?.state?.themeId;
+  const editingThemeId = useSearchParams()[0].get("edit");
   const [theme, setGlobalTheme] = useTheme();
   const [tab, setTab] = React.useState(() =>
     editingThemeId ? "typo" : "base"
   );
+  const navigate = useNavigate();
+
   const [baseTheme, setBaseTheme] = React.useState(theme);
+
+  React.useEffect(() => {
+    if (editingThemeId) {
+      const localTheme = JSON.parse(localStorage.getItem(themesLocal))?.find(
+        (t) => t.id === editingThemeId
+      );
+      if (!localTheme) {
+        navigate("/404");
+      }
+      setBaseTheme(createTheme(localTheme));
+    }
+  }, [editingThemeId, navigate]);
 
   return (
     <Box>

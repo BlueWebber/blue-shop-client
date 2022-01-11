@@ -59,7 +59,7 @@ const Theme = ({ setBaseTheme, baseTheme }) => {
   }, [initialThemes, search]);
 
   const handleEdit = (themeId) => {
-    navigate("create", { state: { themeId } });
+    navigate(`create?edit=${themeId}`);
   };
   const handleDelete = (themeId) => {
     const newThemes = initialThemes.filter((theme) => theme.id !== themeId);
