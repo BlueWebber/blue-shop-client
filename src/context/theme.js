@@ -2,7 +2,9 @@ import React from "react";
 // import useMediaQuery from '@mui/material/useMediaQuery';
 import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
 import darkTheme from "../themes/dark";
-import { currentTheme as currentThemeLocal } from "../localStorageKeys";
+import values from "../localStorageKeys";
+
+const currentThemeLocal = values.currentTheme;
 
 const ThemeSwitcherContext = React.createContext();
 ThemeSwitcherContext.displayName = "ThemeSwitcherContext";

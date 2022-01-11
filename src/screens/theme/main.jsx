@@ -17,7 +17,9 @@ import ThemeCard from "./themeCard";
 import { styled, createTheme } from "@mui/material/styles";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
-import { themes as themesLocal } from "../../localStorageKeys";
+import values from "../../localStorageKeys";
+
+const themesLocal = values.themes;
 
 const StyledForm = styled("form")`
   display: flex;

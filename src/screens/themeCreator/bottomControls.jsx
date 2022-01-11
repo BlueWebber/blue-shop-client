@@ -13,7 +13,9 @@ import {
 import { useNavigate } from "react-router";
 import _ from "lodash";
 import { useThemeCreator } from "../../context/themeCreator";
-import { themes as themesLocal } from "../../localStorageKeys";
+import values from "../../localStorageKeys";
+
+const themesLocal = values.themes;
 
 const DialogText = ({ children }) => {
   return (
