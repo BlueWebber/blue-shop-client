@@ -43,7 +43,7 @@ let BottomControls = ({
   theme,
   saveOpen,
   setSaveOpen,
-  isEditting,
+  isEditing,
   baseThemeId,
   setGlobalTheme,
 }) => {
@@ -121,7 +121,7 @@ let BottomControls = ({
           Cancel
         </Button>
         <Button variant="contained" onClick={() => setSaveOpen(true)}>
-          {isEditting ? "Save" : "Create"}
+          {isEditing ? "Save" : "Create"}
         </Button>
       </Box>
       <Dialog open={cancelOpen} onClose={handleCancelClose}>
@@ -161,7 +161,7 @@ let BottomControls = ({
         </DialogContent>
         <DialogActions>
           <Button onClick={handleSaveClose}>Cancel</Button>
-          <Button onClick={isEditting ? handleEdit : handleSave}>Save</Button>
+          <Button onClick={isEditing ? handleEdit : handleSave}>Save</Button>
         </DialogActions>
       </Dialog>
     </>
@@ -175,7 +175,7 @@ const areEqual = (prevProps, nextProps) =>
 
 BottomControls = React.memo(BottomControls, areEqual);
 
-const Wrapper = ({ tab, isEditting, baseThemeId, setGlobalTheme }) => {
+const Wrapper = ({ tab, isEditing, baseThemeId, setGlobalTheme }) => {
   const [theme] = useThemeCreator();
   const [saveOpen, setSaveOpen] = React.useState(false);
 
@@ -185,7 +185,7 @@ const Wrapper = ({ tab, isEditting, baseThemeId, setGlobalTheme }) => {
       saveOpen={saveOpen}
       setSaveOpen={setSaveOpen}
       tab={tab}
-      isEditting={isEditting}
+      isEditing={isEditing}
       baseThemeId={baseThemeId}
       setGlobalTheme={setGlobalTheme}
     />

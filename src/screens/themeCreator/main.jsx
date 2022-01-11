@@ -16,7 +16,7 @@ const TabPanel = ({ children, tab, value }) => {
 
 const ThemeCreator = () => {
   const location = useLocation();
-  const edittingThemeId = location?.state?.themeId;
+  const editingThemeId = location?.state?.themeId;
   const [theme, setGlobalTheme] = useTheme();
   const [tab, setTab] = React.useState("base");
   const [baseTheme, setBaseTheme] = React.useState(theme);
@@ -55,7 +55,7 @@ const ThemeCreator = () => {
             <ThemeSelector
               setBaseTheme={setBaseTheme}
               baseTheme={baseTheme}
-              baseThemeId={edittingThemeId}
+              baseThemeId={editingThemeId}
             />
           </TabPanel>
           <TabPanel tab={tab} value="typo">
@@ -73,7 +73,7 @@ const ThemeCreator = () => {
         </Paper>
         <BottomControls
           tab={tab}
-          isEditting={edittingThemeId}
+          isEditing={editingThemeId}
           baseThemeId={baseTheme.id}
           setGlobalTheme={setGlobalTheme}
         />
