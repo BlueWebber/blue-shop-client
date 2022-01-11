@@ -18,7 +18,9 @@ const ThemeCreator = () => {
   const location = useLocation();
   const editingThemeId = location?.state?.themeId;
   const [theme, setGlobalTheme] = useTheme();
-  const [tab, setTab] = React.useState("base");
+  const [tab, setTab] = React.useState(() =>
+    editingThemeId ? "typo" : "base"
+  );
   const [baseTheme, setBaseTheme] = React.useState(theme);
 
   return (
@@ -38,7 +40,7 @@ const ThemeCreator = () => {
           scrollButtons
           allowScrollButtonsMobile
         >
-          <Tab label="Base" id="base" value="base" />
+          {!editingThemeId && <Tab label="Base" id="base" value="base" />}
           <Tab label="Typography" id="typo" value="typo" />
           <Tab label="Buttons" id="btn" value="btn" />
           <Tab
@@ -51,13 +53,14 @@ const ThemeCreator = () => {
       </Box>
       <ThemeCreatorProvider baseTheme={baseTheme}>
         <Paper elevation={0} sx={{ backgroundColor: "inherit", padding: 0 }}>
-          <TabPanel tab={tab} value="base">
-            <ThemeSelector
-              setBaseTheme={setBaseTheme}
-              baseTheme={baseTheme}
-              baseThemeId={editingThemeId}
-            />
-          </TabPanel>
+          {!editingThemeId && (
+            <TabPanel tab={tab} value="base">
+              <ThemeSelector
+                setBaseTheme={setBaseTheme}
+                baseTheme={baseTheme}
+              />
+            </TabPanel>
+          )}
           <TabPanel tab={tab} value="typo">
             <TypgographyExample />
           </TabPanel>

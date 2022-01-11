@@ -30,7 +30,7 @@ const getThemes = () => JSON.parse(localStorage.getItem("themes"));
 const setStorageThemes = (themes) =>
   localStorage.setItem("themes", JSON.stringify(themes));
 
-const Theme = ({ setBaseTheme, baseTheme, baseThemeId }) => {
+const Theme = ({ setBaseTheme, baseTheme }) => {
   const [theme, setTheme] = useTheme();
   const [initialThemes, setInitialThemes] = React.useState(() => [
     ...defaultThemes,
@@ -54,12 +54,6 @@ const Theme = ({ setBaseTheme, baseTheme, baseThemeId }) => {
         )
       : setThemes(initialThemes);
   }, [initialThemes, search]);
-
-  React.useLayoutEffect(() => {
-    if (baseThemeId) {
-      setBaseTheme(initialThemes.find((theme) => theme.id === baseThemeId));
-    }
-  }, [baseThemeId, setBaseTheme, initialThemes]);
 
   const handleEdit = (themeId) => {
     navigate("create", { state: { themeId } });
