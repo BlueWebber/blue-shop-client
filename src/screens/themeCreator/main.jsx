@@ -35,11 +35,12 @@ const ThemeCreator = () => {
       }
       return createTheme(localTheme);
     }
+    return theme;
   });
 
   return (
     <Box>
-      {editingThemeId !== baseTheme.id ? (
+      {editingThemeId && editingThemeId !== baseTheme.id ? (
         <Navigate to="/404" />
       ) : (
         <>
