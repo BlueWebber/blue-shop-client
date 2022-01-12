@@ -80,17 +80,14 @@ const Misc = () => {
           <ControlledColorPicker
             color={shadowColor[0]}
             setColor={handleColorChange(0)}
-            colorType="rgb"
           />
           <ControlledColorPicker
             color={shadowColor[1]}
             setColor={handleColorChange(1)}
-            colorType="rgb"
           />
           <ControlledColorPicker
             color={shadowColor[2]}
             setColor={handleColorChange(2)}
-            colorType="rgb"
           />
         </GridItem>
         <GridItem>
@@ -106,8 +103,6 @@ const Misc = () => {
             theme={theme}
             setTheme={setTheme}
             themeValue="palette.divider"
-            withoutAlpha={false}
-            colorType="rgb"
           />
         </GridItem>
       </Grid>

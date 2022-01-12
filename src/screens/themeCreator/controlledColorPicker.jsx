@@ -10,12 +10,7 @@ const StyledSketchPicker = styled(SketchPicker)(
   `
 );
 
-const ControlledColorPicker = ({
-  color,
-  setColor,
-  colorType,
-  disabledAlpha,
-}) => {
+const ControlledColorPicker = ({ color, setColor }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClose = () => setOpen(false);
@@ -50,9 +45,8 @@ const ControlledColorPicker = ({
             <StyledSketchPicker
               color={color}
               onChange={(colorChange) => {
-                setColor(colorChange[colorType]);
+                setColor(colorChange["rgb"]);
               }}
-              disableAlpha={disabledAlpha}
             />
           </Box>
         </ClickAwayListener>
