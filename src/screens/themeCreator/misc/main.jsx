@@ -43,7 +43,6 @@ const createShadows = (
 const Misc = () => {
   const [theme, setTheme] = useThemeCreator();
 
-  // fix the regex
   const [shadowColor, setShadowColor] = React.useState(() =>
     theme.shadows[1].match(
       /rgba?\(((25[0-5]|2[0-4]\d|1\d{1,2}|\d\d?)\s*,\s*?){2}(25[0-5]|2[0-4]\d|1\d{1,2}|\d\d?)\s*,?\s*([01]\.?\d*?)?\)/g

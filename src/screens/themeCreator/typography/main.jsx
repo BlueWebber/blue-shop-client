@@ -52,8 +52,6 @@ const typoExamples = [
 const TypographyExample = () => {
   const [theme, setTheme] = useThemeCreator();
 
-  console.log(theme);
-
   return (
     <ThemeProvider theme={theme}>
       <Paper elevation={0} sx={{ backgroundColor: "inherit", padding: 0 }}>

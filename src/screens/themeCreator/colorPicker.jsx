@@ -14,7 +14,10 @@ const ColorPicker = ({
     () =>
       colorType === "hex"
         ? (color) => color
-        : (color) => `rgba(${color.r},${color.g},${color.b},${color.a})`,
+        : (color) =>
+            typeof color === "string"
+              ? color
+              : `rgba(${color.r},${color.g},${color.b},${color.a})`,
     [colorType]
   );
 
