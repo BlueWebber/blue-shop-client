@@ -64,9 +64,16 @@ const Theme = ({ setBaseTheme, baseTheme }) => {
   const handleDelete = (themeId) => {
     const newThemes = initialThemes.filter((theme) => theme.id !== themeId);
     const customThemes = newThemes.filter(
-      (theme) =>
-        theme.id !== defaultThemes[0].id && theme.id !== defaultThemes[1].id
+      (mapTheme) =>
+        mapTheme.id !== lightTheme.id && mapTheme.id !== darkTheme.id
     );
+    if (theme.id === themeId) {
+      setTheme(
+        window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? darkTheme
+          : lightTheme
+      );
+    }
     setThemes(newThemes);
     setInitialThemes(newThemes);
     setStorageThemes(customThemes);
