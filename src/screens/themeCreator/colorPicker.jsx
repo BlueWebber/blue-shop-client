@@ -4,18 +4,20 @@ import ControlledColorPicker from "./controlledColorPicker";
 
 const ColorPicker = ({ theme, setTheme, themeValue }) => {
   const [color, setColor] = React.useState(() => _.get(theme, themeValue));
-  const colorGetter = (color) =>
-    typeof color === "string"
-      ? color
-      : `rgba(${color.r},${color.g},${color.b},${color.a})`;
+
+  const colorSetter = (newColor) =>
+    typeof newColor === "string"
+      ? setColor(newColor)
+      : setColor(
+          `rgba(${newColor.r},${newColor.g},${newColor.b},${newColor.a})`
+        );
 
   React.useEffect(
-    () =>
-      setTheme((t) => _.set(_.cloneDeep(t), themeValue, colorGetter(color))),
+    () => setTheme((t) => _.set(_.cloneDeep(t), themeValue, color)),
     [color, setTheme, themeValue]
   );
 
-  return <ControlledColorPicker color={color} setColor={setColor} />;
+  return <ControlledColorPicker color={color} setColor={colorSetter} />;
 };
 
 export default ColorPicker;
